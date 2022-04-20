@@ -9,10 +9,6 @@ const port = process.env.PORT || 3000
 
 app.use(express.json())
 
-app.use((req, res, next) => {
-    console.log("Passei no middleware!")
-    next()
-})
 
 app.listen(port, ()=>{
     console.log(`Servidor em http://localhost:${port}`)
