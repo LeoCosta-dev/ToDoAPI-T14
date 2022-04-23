@@ -1,13 +1,15 @@
 import DatabaseMetodos from "../utils/DatabaseMetodos.js";
 
-const table = await DatabaseMetodos.createTable()
-
-await DatabaseMetodos.popular(
-    {
-        id: 1, 
-        nome:"José", 
-        sobrenome: "das Couves", 
-        email:"couve@mineira.com"
-    })
-
-console.log(table)
+try {
+    const table = await DatabaseMetodos.createTable()
+    console.log(table)
+    await DatabaseMetodos.popular(
+        {
+            id: 2, 
+            nome:"José das Couves", 
+            email:"couve@mineira.com",
+            telefone: 21777777777
+        })    
+} catch (e) {
+    console.log(e.message)
+}
