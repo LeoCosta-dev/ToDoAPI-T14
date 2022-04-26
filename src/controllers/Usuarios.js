@@ -1,4 +1,4 @@
-import DatabaseMetodos from "../utils/DatabaseMetodos.js"
+import DatabaseMetodos from "../DAO/DatabaseMetodos.js"
 import UsuariosModel from "../models/UsuariosModel.js"
 
 class Usuarios{
