@@ -1,6 +1,19 @@
 class Validacoes{
+    /**
+     * 
+     * @param {string} string 
+     * @returns boolean
+     */
     static validaNome(string){
         if(string.length >= 3){
+            return true
+        } else {
+            return false
+        }
+    }
+    static validaTelefone(telefone){
+        const telefoneNum = parseInt(telefone)
+        if(telefone.length == 11 && telefoneNum == telefone){
             return true
         } else {
             return false
@@ -10,14 +23,4 @@ class Validacoes{
 
 export default Validacoes;
 
-// export function validaNome(string){
-//     if(string.length >= 3){
-//         return true
-//     } else {
-//         return false
-//     }
-// }
 
-// export function log(){
-//     console.log("Passei aqui!")
-// }
