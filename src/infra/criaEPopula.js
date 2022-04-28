@@ -1,4 +1,4 @@
-import DatabaseMetodos from "../utils/DatabaseMetodos.js";
+import DatabaseMetodos from "../DAO/DatabaseMetodos.js";
 
 try {
     const table = await DatabaseMetodos.createTable()
