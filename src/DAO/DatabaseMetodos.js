@@ -1,7 +1,20 @@
 import Database from "../infra/Database.js"
 
 class DatabaseMetodos{
+    static activePragma(){
+        const pragma = "PRAGMA foreing_keys = ON"
+        Database.run(pragma, (e) => {
+            if(e){
+                console.log(e)
+            } else {
+                console.log("Chaves estrangeiras, ativas.")
+            }
+        })
+    }
     static createTable(){
+
+        this.activePragma()
+
         const tabela_usuarios = `
         CREATE TABLE IF NOT EXISTS usuarios (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -48,6 +61,44 @@ class DatabaseMetodos{
                     reject(e.message)
                 } else {
                     resolve({rows:rows})
+                }
+            })
+        })
+    }
+    static listaPorId(id){
+        const query = "SELECT * FROM usuarios WHERE id = ?"
+        return new Promise ((resolve, reject) => {
+            Database.get(query, id, (e, result)=>{
+                if(e){
+                    reject(e.message)
+                } else {
+                    resolve(result)
+                }
+            } )
+        })
+    }
+    static atualizaPorId(usuario, id){
+        const query = `
+        UPDATE usuarios SET (id, nome, email, telefone) = (?,?,?,?) WHERE id = ?
+        `
+        return new Promise((resolve, reject) => {
+            Database.run(query, [...usuario, id], (e, result) => {
+                if(e){
+                    reject(e.message)
+                } else {
+                    resolve(result)
+                }
+            })
+        })
+    }
+    static deletaPorId(id){
+        const query = "DELETE FROM usuarios WHERE id = ?"
+        return new Promise ((resolve, reject) => {
+            Database.run(query, id, (e)=>{
+                if (e){
+                    reject(e.message)
+                } else {
+                    resolve({error: false, idDeletado: id})
                 }
             })
         })
